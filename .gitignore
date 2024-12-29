@@ -1,0 +1,18 @@
+# Terraform
+**/.terraform/*
+
+*.tfstate
+*.tfstate.*
+
+# Bun
+**/node_modules
+**/out
+**/build
+**/dist
+
+**/.*.bun-build
+
+# Environment
+.vscode
+
+.env
