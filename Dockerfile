@@ -5,7 +5,7 @@ ARG BUN_SOURCEMAP="true"
 ARG BUN_COMPILE="true"
 ARG BUN_BYTECODE="true"
 WORKDIR /tmp
-COPY package.json bun.lockb tsconfig.json ./
+COPY package.json bun.lock tsconfig.json ./
 COPY src src
 RUN bun install --frozen-lockfile --production
 RUN bun build src/bootstrap.ts --outfile dist/bootstrap \
