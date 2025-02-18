@@ -3,8 +3,11 @@ provider "aws" {
 
   default_tags {
     tags = {
-      terraform = "true"
-      scope     = var.application_name
+      Scope       = "superagent"
+      Environment = "common"
+      Repository  = "docker-lambda-bun"
+      Owner       = "terraform:infrastructure"
+      Terraform   = "true"
     }
   }
 }
