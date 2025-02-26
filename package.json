@@ -1,15 +1,22 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@superagent/lambda-bun",
-  "module": "src/bootstrap",
   "type": "module",
+  "module": "src/bootstrap",
+  "scripts": {
+    "format": "bun run prettier --write .",
+    "lint": "bun run eslint ."
+  },
+  "dependencies": {
+    "aws4fetch": "^1.0.20"
+  },
   "devDependencies": {
+    "@rogwilco/defaults-eslint": "^0.1.0",
+    "@rogwilco/defaults-prettier": "^0.1.3",
+    "@rogwilco/defaults-typescript": "^0.1.1",
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "aws4fetch": "^1.0.20"
   }
 }
