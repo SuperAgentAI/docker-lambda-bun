@@ -10,12 +10,12 @@ COPY src src
 RUN bun install --frozen-lockfile --production
 RUN bun build src/bootstrap.ts --outfile dist/bootstrap \
   --target bun \
-  $(if [ "$BUN_SOURCEMAP" = "true" ]; then echo "--sourcemap"; fi) \
+  $(if [ "$BUN_SOURCEMAP" = "true" ]; then echo "--sourcemap=inline"; fi) \
   $(if [ "$BUN_COMPILE" = "true" ]; then echo "--compile"; fi) \
   $(if [ "$BUN_BYTECODE" = "true" ]; then echo "--bytecode"; fi)
 RUN bun build src/index.ts --outfile dist/index \
   --target bun \
-  $(if [ "$BUN_SOURCEMAP" = "true" ]; then echo "--sourcemap"; fi)
+  $(if [ "$BUN_SOURCEMAP" = "true" ]; then echo "--sourcemap=inline"; fi)
 
 FROM public.ecr.aws/lambda/provided:al2 AS runtime
 ARG LAMBDA_RUNTIME_MODE="direct"
