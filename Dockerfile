@@ -5,7 +5,7 @@ ARG BUN_SOURCEMAP="true"
 ARG BUN_COMPILE="true"
 ARG BUN_BYTECODE="true"
 WORKDIR /tmp
-COPY package.json bun.lock tsconfig.json ./
+COPY package.json bun.lock bunfig.toml tsconfig.json ./
 COPY src src
 RUN bun install --frozen-lockfile --production
 RUN bun build src/bootstrap.ts --outfile dist/bootstrap \
@@ -17,9 +17,10 @@ RUN bun build src/index.ts --outfile dist/index \
   --target bun \
   $(if [ "$BUN_SOURCEMAP" = "true" ]; then echo "--sourcemap=inline"; fi)
 
-FROM public.ecr.aws/lambda/provided:al2 AS runtime
+FROM public.ecr.aws/lambda/provided:al2023 AS runtime
 ARG LAMBDA_RUNTIME_MODE="direct"
 COPY --from=builder /usr/local/bin/bun /usr/local/bin/bun
+COPY --from=builder /tmp/bunfig.toml /root/.bunfig.toml
 ENV NODE_ENV=production
 ENV LAMBDA_RUNTIME_MODE=${LAMBDA_RUNTIME_MODE}
 COPY --from=builder /tmp/node_modules ${LAMBDA_RUNTIME_DIR}
