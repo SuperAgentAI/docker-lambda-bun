@@ -1,5 +1,5 @@
 import { run as runDirect } from 'aws-lambda-ric'
-import { run as runNative } from './lib/bun-lambda-ric'
+import { run as runNative } from './lib/not-implemented-ric'
 
 if (process.argv.length < 3) {
   throw new Error('No handler specified')
